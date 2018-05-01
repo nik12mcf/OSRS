@@ -8,82 +8,78 @@
 using namespace std;
 
 int RandomNumGen(int maxrange, int minrange);
-int Time(int hours);
-void LeftClick();
 double RandomNumGen2(double minrange, double maxrange);
+void LeftClick();
 void RightClick();
 
-int main(int argc, char *arSgv[])
+bool ThreeTick = true;
+
+class Mining
+{
+
+public:
+    void beginFish(); //Click location of fish
+
+    void threeTickTB(); //Swamp tar and herb
+
+    void threeTickDropFish(); //Drop fish
+
+    void runThreeTickFishing(); //run three tick fishing
+};
+
+int main(int argc, char *argv[])
 {
     Sleep(5000);
-    int holder = 28;
 
-    while(1)
+    Mining mining;
+
+    //mining.getOptions(argc, argv);
+
+    if(ThreeTick)
     {
-        /*
-        if(holder == 28)
+        while(1)
         {
-            int x = 1330; //START 1330
-            int y = 255;
-            int counter = 1;
-
-            while(counter < 28)
-            {
-                keybd_event(VK_SHIFT,0x26,0,0);
-
-                Sleep(20);
-                if(counter % 4 == 1)
-                {
-                    y += 37;
-                    x = 1330;
-                }
-
-                SetCursorPos(x, y);
-                LeftClick();
-
-                counter++;
-                x += 42;
-
-                keybd_event(VK_SHIFT, 0x26, KEYEVENTF_KEYUP, 0);
-            }
-
-            holder = 0;
+            mining.runThreeTickFishing();
         }
-
-        keybd_event(VK_RIGHT,0x26,0,0);
-        keybd_event(VK_RIGHT, 0x26, KEYEVENTF_KEYUP, 0);
-        keybd_event(VK_LEFT,0x26,0,0);
-        keybd_event(VK_LEFT, 0x26, KEYEVENTF_KEYUP, 0);
-        */
-        ////////////////////////////
-        //Sleep(1000);
-
-        SetCursorPos(1025, 125);
-        Sleep(200);
-        LeftClick();
-        ////////////////////////////
-
-        Sleep(2000);
-
-
-        SetCursorPos(1414, 255);
-        Sleep(100);
-        LeftClick();
-        SetCursorPos(1456, 255);
-        Sleep(100);
-        LeftClick();
-
-
-        //keybd_event(VK_SHIFT,0x26,0,0);
-        SetCursorPos(1330, 292);
-        Sleep(100);
-        keybd_event(VK_SHIFT,0x26,0,0);
-        LeftClick();
-        Sleep(100);
-        keybd_event(VK_SHIFT, 0x26, KEYEVENTF_KEYUP, 0);
-
-        holder += 1;
     }
+}
+
+void Mining::beginFish()
+{
+    SetCursorPos(1025, 125);
+    Sleep(200);
+    LeftClick();
+}
+
+void Mining::threeTickDropFish()
+{
+    SetCursorPos(1330, 292);
+    Sleep(100);
+    keybd_event(VK_SHIFT,0x26,0,0);
+    LeftClick();
+    Sleep(100);
+    keybd_event(VK_SHIFT, 0x26, KEYEVENTF_KEYUP, 0);
+}
+
+void Mining::threeTickTB()
+{
+    SetCursorPos(1414, 255);
+    Sleep(100);
+    LeftClick();
+    SetCursorPos(1456, 255);
+    Sleep(100);
+    LeftClick();
+}
+
+void Mining::runThreeTickFishing()
+{
+    beginFish();
+
+    Sleep(2000); //Usual time to process catching a fish
+
+    threeTickTB();
+
+    threeTickDropFish();
 }
 
 void LeftClick()
